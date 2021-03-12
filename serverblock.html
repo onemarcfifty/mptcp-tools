@@ -1,0 +1,31 @@
+
+  <form class="form-inline" id="$SERVERNAME$-form" onsubmit="return dosubmitform(this);" >
+
+    <div class="panel panel-primary"> 
+      <div class="panel-heading" align="right">
+        <div class="panel-title" align="right" >
+          <table width="100%" align = "center">
+            <tr>
+              <td align=left  width="50%">Server: $SERVERNAME$  ($SERVERIP$)</td>
+              <td align=right width="50%">
+                <button align="right" onclick=submit class="btn btn-info">
+                  <span class="glyphicon glyphicon-ok"></span> apply
+                </button>
+              </td>
+            </tr>
+          </table>
+      </div> 
+    </div>    
+      <div class="panel-body">
+
+                  <input id="servername" name="servername" value="$SERVERNAME$" hidden=true>
+                  <input id="ipaddress" name="ipaddress" value="$SERVERIP$" hidden=true>
+
+
+$IFBLOCK$
+      </div>
+
+    </div>
+
+  </form>
+ 

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OneMarcFifty tc interface</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css">
+
+  <style>
+    body 
+    {
+      background-color: lightgrey;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<br>
+
+<div class="container">
+  <div class="well">
+    <h2> 
+      <table width="100%" align = "center">
+        <tr>
+          <td align=left  width="50%">QDISC scheduler interface</td>
+          <td align=right width="50%"><span class="label label-success">
+  <a href="https://www.youtube.com/channel/UCG5Ph9Mm6UEQLJJ-kGIC2AQ"> onemarcfifty</a></span></td>
+        </tr>
+      </table>
+      <div align="left"> </div>
+      <div align="right">
+        
+      </div> 
+    </h2>
+  </div>
+
+    <div width="90%" align = "center">
+
+$SERVERBLOCK$
+
+    </div>
+
+<div class="row d-flex justify-content-center">
+  <div class="col-sm-8 mt-2">
+    <label for="responsefield">Server response</label>
+    <div class="md-form">
+      <textarea id="responsefield" name="responsefield" class="md-textarea scrollable textarea-scrollable form-control" rows="3"></textarea>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<script>
+
+// shortcut to access a document element with $("selector")
+$ = function(sel) {
+  return document.querySelector(sel);
+};
+
+
+// //////////////////////////////////////////////////
+// dosubmitform submits 
+// the form data
+// //////////////////////////////////////////////////
+
+//var dosubmitform = function(theformname) 
+var dosubmitform = function(theForm) 
+{
+
+//  console.log(theForm);
+  const formData = new FormData(theForm);
+
+//  console.log(formData);
+//  console.log(formData.entries());
+
+//  const value = Object.fromEntries(formData.entries());
+//  console.log(value);
+
+  var object = {};
+  var counter=0;
+  formData.forEach(function(value, key){
+//     console.log(key);
+     if ("interfacename" == key) counter++;
+     if (0 == counter) 
+       object[key] = value
+     else
+      object[key+"_"+counter] = value;
+  });
+  object["numinterfaces"] = counter;
+  
+//  console.log(object);
+  var json = JSON.stringify(object);
+//  console.log(json);
+
+  let xml = new XMLHttpRequest();
+
+  // the callback function shall fill out the large bottom textfield
+
+  xml.onreadystatechange = function() 
+  {
+    if (xml.readyState == XMLHttpRequest.DONE) 
+    {
+      var theTextField = document.getElementById("responsefield");
+      theTextField.value=xml.responseText;
+    }
+  }
+
+
+  xml.open("POST", "/formdata");
+//  xml.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  xml.send(json);
+//  xml.send(formData);
+  return(false);
+} 
+
+</script>
+
+
+</body></html>
