@@ -207,8 +207,8 @@ var dataHandler = function (request, chunkdata) {
     for (var ifNum=1; ifNum <= numberOfInterfaces ; ifNum++)
     {
       console.log("1");
-      var commandString = 'ssh -i id_' + 
-        jsonObject["servername"] + ' root\@'  +
+      var commandString = 'ssh -q -oStrictHostKeyChecking=no -i ' + 
+        jsonObject["keyFile"] + ' root\@'  +
         jsonObject["ipaddress"] + ' \"tc qdisc del dev ' +
         jsonObject["interfacename_" + ifNum] + ' root netem ; tc qdisc add dev ' +
         jsonObject["interfacename_" + ifNum] + ' root netem loss random ' +
