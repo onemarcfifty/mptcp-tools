@@ -85,7 +85,8 @@ var dosubmitform = function(theForm)
   var object = {};
   var counter=0;
   formData.forEach(function(value, key){
-//     console.log(key);
+     console.log(value);
+     console.log(key);
      if ("interfacename" == key) counter++;
      if (0 == counter) 
        object[key] = value

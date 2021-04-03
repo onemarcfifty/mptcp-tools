@@ -173,6 +173,7 @@ var formHandler = function (request, response) {
     serverBlockReply += serverBlockFileContent.replace(/\$SERVERNAME\$/g,serverList.servers[servNum].name);
     serverBlockReply = serverBlockReply.replace(/\$IFBLOCK\$/g,ifBlockReply);
     serverBlockReply = serverBlockReply.replace(/\$SERVERIP\$/g,serverList.servers[servNum].ip);
+    serverBlockReply = serverBlockReply.replace(/\$KEYFILE\$/g,serverList.servers[servNum].keyFile);
   }
 
 
@@ -208,7 +209,7 @@ var dataHandler = function (request, chunkdata) {
     {
       console.log("1");
       var commandString = 'ssh -q -oStrictHostKeyChecking=no -i ' + 
-        jsonObject["keyFile"] + ' root\@'  +
+        jsonObject["keyfilename"] + ' root\@'  +
         jsonObject["ipaddress"] + ' \"tc qdisc del dev ' +
         jsonObject["interfacename_" + ifNum] + ' root netem ; tc qdisc add dev ' +
         jsonObject["interfacename_" + ifNum] + ' root netem loss random ' +
